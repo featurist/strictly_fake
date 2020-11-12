@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'very_fake/version'
+require_relative './very_fake/version'
 
 # VeryFake - verifying fake
 class VeryFake
