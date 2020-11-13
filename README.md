@@ -1,6 +1,6 @@
 # VeryFake
 
-Sometimes fakes are a good choice. But the price is high. In particular, they make changing code harder. You rename a method, but all tests that stub the previous version _keep_ passing. It would be nice if those started to failing so that when they're green again, you can be certain that everything that had to be updated was updated. Well, now you can.
+Sometimes fakes are a good choice. But the price is high. In particular, they make changing code harder. You rename a method, but all tests that stub the previous version _keep_ passing. It would be nice if those started to fail so that when they're green again, you can be certain that everything that had to be updated was updated. Well, now you can.
 
 To be fare, you already can in Rspec with their [veryfying double](https://relishapp.com/rspec/rspec-mocks/v/3-9/docs/verifying-doubles). But what about Minitest? And there are still subtle differences:
 
@@ -34,7 +34,7 @@ now.stub(:bar)
 # Still throws: "Expected Time#zone stub to accept (), but was (req) (VeryFake::Error)"
 now.stub(:zone) { |arg| }
 
-# Happy days
+# All good now!
 now.stub(:zone) { 'XYZ' }
 now.zone # => 'XYZ'
 
