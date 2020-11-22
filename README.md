@@ -39,17 +39,14 @@ now.stub(:zone) { |arg| }
 now.stub(:zone) { 'XYZ' }
 now.zone # => 'XYZ'
 
-# Makeshift mock
-invoked = false
-
+# Spy on the arguments
 now.stub(:strftime) do |fmt|
-  # A bit of spying for good measure
   assert(fmt.is_a?(String))
-
-  invoked = true
 end
 
-assert_changes('invoked') { now.strftime('zyx') }
+# Verify it's been called
+assert_difference('now.__calls.size') { now.strftime('zyx') }
+assert_equal([['xyz']], now.__calls)
 
 # Stubbing class methods is no different
 time = VeryFake.new(Time)
