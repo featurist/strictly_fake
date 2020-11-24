@@ -46,7 +46,8 @@ payment_gateway.stub(:pay) { |amount| }
 
 # All good now!
 payment_gateway.stub(:pay) { |recipient, amount, reference = nil| 'Success!' }
-payment_gateway.pay('Dave', 10) # => 'Success!'
+payment_gateway.pay('Dave', 10)
+# => 'Success!'
 
 # Makeshift mock
 invoked = false
@@ -63,7 +64,8 @@ assert(invoked)
 time = StrictlyFake.new(Time)
 
 time.stub(:now) { 'XYZ' }
-time.now # => 'XYZ'
+time.now
+# => 'XYZ'
 ```
 
 Note: Minitest is required for `assert*` to work.
