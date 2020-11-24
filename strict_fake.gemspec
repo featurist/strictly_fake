@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['artemave']
   spec.email         = ['artemave@gmail.com']
 
-  spec.summary       = 'You stub, we bail you out.'
-  spec.description   = 'You stub, we make sure stubbed methods exist and the signatures match.'
+  spec.summary       = 'Stub that automatically verifies that stubbed methods exist and the signatures match.'
+  spec.description   = "This is similar to Rspec's Veryfing Double, but standalone. So can be used in Minitest."
   spec.homepage      = 'https://github.com/featurist/veri_fake'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
