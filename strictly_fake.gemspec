@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-require_relative 'lib/strict_fake/version'
+require_relative 'lib/strictly_fake/version'
 
+# rubocop:disable Layout/LineLength
 Gem::Specification.new do |spec|
-  spec.name          = 'strict_fake'
-  spec.version       = StrictFake::VERSION
+  spec.name          = 'strictly_fake'
+  spec.version       = StrictlyFake::VERSION
   spec.authors       = ['artemave']
   spec.email         = ['artemave@gmail.com']
 
   spec.summary       = 'Stub that automatically verifies that stubbed methods exist and the signatures match the original.'
-  spec.description   = "This is similar to Rspec's Veryfing Double, but standalone. So can be used in Minitest."
-  spec.homepage      = 'https://github.com/featurist/veri_fake'
+  spec.description   = spec.summary
+  spec.homepage      = 'https://github.com/featurist/strictly_fake'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
 
@@ -26,3 +27,4 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 end
+# rubocop:enable Layout/LineLength
