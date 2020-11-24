@@ -36,11 +36,13 @@ end
 # We can use a fake instead
 payment_gateway = StrictlyFake.new(PaymentGateway.new)
 
-# Throws "Can't stub non-existent method PaymentGateway#bar (StrictlyFake::Error)"
+# Let's stub a method that isn't defined in PaymentGateway:
 payment_gateway.stub(:bar)
+# => throws "Can't stub non-existent method PaymentGateway#bar (StrictlyFake::Error)"
 
-# Still throws: "Expected PaymentGateway#pay stub to accept (req, req, opt=), but was (req) (StrictlyFake::Error)"
+# Let's stub an existing method, but with a wrong signature: 
 payment_gateway.stub(:pay) { |amount| }
+# => throws "Expected PaymentGateway#pay stub to accept (req, req, opt=), but was (req) (StrictlyFake::Error)"
 
 # All good now!
 payment_gateway.stub(:pay) { |recipient, amount, reference = nil| 'Success!' }
@@ -49,7 +51,7 @@ payment_gateway.pay('Dave', 10) # => 'Success!'
 # Makeshift mock
 invoked = false
 payment_gateway.stub(:pay) do |recipient, amount, reference = nil|
-  # Further assert arguments
+  # Further arguments check
   assert(amount.is_a?(Money))
   invoked = true
 end
