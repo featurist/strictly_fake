@@ -28,6 +28,8 @@ class StrictFake
   end
 
   def stub(meth, &block)
+    raise Error, "Can't stub #stub" if meth.to_s == 'stub'
+
     assert_method_defined(meth)
 
     expected_parameters = @real.method(meth).parameters
@@ -35,9 +37,7 @@ class StrictFake
 
     assert_method_signature_match(meth, expected_parameters, actual_parameters)
 
-    (class << @fake; self; end).class_eval do
-      define_method(meth, &block)
-    end
+    stub_method(meth, &block)
   end
 
   # rubocop:disable Lint/MissingSuper
@@ -51,6 +51,18 @@ class StrictFake
   end
 
   private
+
+  def stub_method(meth, &block)
+    if respond_to?(meth)
+      (class << self; self; end).class_eval do
+        undef_method meth
+      end
+    end
+
+    (class << @fake; self; end).class_eval do
+      define_method(meth, &block)
+    end
+  end
 
   def real_class_name
     @real.is_a?(Class) ? @real.name : @real.class.name

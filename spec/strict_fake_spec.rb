@@ -11,6 +11,8 @@ class RealThing
   def foo(aaa, ddd = 2, *args, bbb:, ccc: 5, **opts); end
 
   def bar; end
+
+  def stub; end
 end
 
 # rubocop:disable Metrics/BlockLength
@@ -89,6 +91,24 @@ RSpec.describe StrictFake do
     fake = StrictFake.new(RealThing.new)
 
     expect { fake.stub(:bar) { |&block| } }.to_not raise_error
+  end
+
+  it 'does not allow stubbing stub' do
+    fake = StrictFake.new(RealThing.new)
+
+    expect do
+      fake.stub(:stub) {}
+    end.to raise_error(
+      StrictFake::Error,
+      "Can't stub #stub"
+    )
+  end
+
+  it 'allows to stub Object.methods too' do
+    fake = StrictFake.new(RealThing.new)
+
+    fake.stub(:class) { 'banana' }
+    expect(fake.class).to eq('banana')
   end
 end
 # rubocop:enable Metrics/BlockLength
