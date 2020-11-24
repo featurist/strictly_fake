@@ -32,7 +32,7 @@ class PaymentProcessor
 end
 
 # We can use a fake instead
-payment_processor = VeryFake.new(PaymentProcessor.now)
+payment_processor = VeryFake.new(PaymentProcessor.new)
 
 # Throws "Can't stub non-existent method PaymentProcessor#bar (VeryFake::Error)"
 payment_processor.stub(:bar)
