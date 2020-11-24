@@ -46,6 +46,7 @@ payment_gateway.stub(:pay) { |amount| }
 
 # All good now!
 payment_gateway.stub(:pay) { |recipient, amount, reference = nil| 'Success!' }
+
 payment_gateway.pay('Dave', 10)
 # => 'Success!'
 
