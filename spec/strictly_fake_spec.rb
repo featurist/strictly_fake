@@ -16,49 +16,49 @@ class RealThing
 end
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe StrictFake do
+RSpec.describe StrictlyFake do
   it 'has a version number' do
-    expect(StrictFake::VERSION)
+    expect(StrictlyFake::VERSION)
   end
 
   it 'raises if stubbed object does not have stubbed method' do
-    fake = StrictFake.new(RealThing.new)
+    fake = StrictlyFake.new(RealThing.new)
 
     expect do
       fake.stub(:fiction) {}
-    end.to raise_error(StrictFake::Error, "Can't stub non-existent method RealThing#fiction")
+    end.to raise_error(StrictlyFake::Error, "Can't stub non-existent method RealThing#fiction")
   end
 
   it 'raises if stubbed object does not have stubbed class method' do
-    fake = StrictFake.new(RealThing)
+    fake = StrictlyFake.new(RealThing)
 
     expect do
       fake.stub(:fiction) {}
-    end.to raise_error(StrictFake::Error, "Can't stub non-existent method RealThing.fiction")
+    end.to raise_error(StrictlyFake::Error, "Can't stub non-existent method RealThing.fiction")
   end
 
   it 'raises if stubbed method signature does not match the real thing' do
-    fake = StrictFake.new(RealThing.new)
+    fake = StrictlyFake.new(RealThing.new)
 
     expect do
       fake.stub(:foo) {}
     end.to raise_error(
-      StrictFake::Error,
+      StrictlyFake::Error,
       'Expected RealThing#foo stub to accept (req, opt=, *rest, :bbb, :ccc, **keyrest), but was ()'
     )
 
-    fake = StrictFake.new(RealThing)
+    fake = StrictlyFake.new(RealThing)
 
     expect do
       fake.stub(:bar) { |nnn, aaa:, **opts| }
     end.to raise_error(
-      StrictFake::Error,
+      StrictlyFake::Error,
       'Expected RealThing.bar stub to accept (), but was (req, :aaa, **keyrest)'
     )
   end
 
   it 'defines stubbed method' do
-    fake = StrictFake.new(RealThing.new)
+    fake = StrictlyFake.new(RealThing.new)
     n = 0
 
     fake.stub(:bar) { n = 1 }
@@ -70,7 +70,7 @@ RSpec.describe StrictFake do
   end
 
   it 'keyword arguments can be in any order' do
-    fake = StrictFake.new(RealThing.new)
+    fake = StrictlyFake.new(RealThing.new)
 
     expect do
       fake.stub(:foo) { |aaa, ddd = 6, *restargs, bbb:, ccc: 5, **keyopts| }
@@ -78,7 +78,7 @@ RSpec.describe StrictFake do
   end
 
   it 'stubbed methods can have minitest assertions inside' do
-    fake = StrictFake.new(RealThing.new)
+    fake = StrictlyFake.new(RealThing.new)
 
     fake.stub(:bar) do
       assert(true)
@@ -88,24 +88,24 @@ RSpec.describe StrictFake do
   end
 
   it 'ignores block parameter' do
-    fake = StrictFake.new(RealThing.new)
+    fake = StrictlyFake.new(RealThing.new)
 
     expect { fake.stub(:bar) { |&block| } }.to_not raise_error
   end
 
   it 'does not allow stubbing stub' do
-    fake = StrictFake.new(RealThing.new)
+    fake = StrictlyFake.new(RealThing.new)
 
     expect do
       fake.stub(:stub) {}
     end.to raise_error(
-      StrictFake::Error,
+      StrictlyFake::Error,
       "Can't stub #stub"
     )
   end
 
   it 'allows to stub Object.methods too' do
-    fake = StrictFake.new(RealThing.new)
+    fake = StrictlyFake.new(RealThing.new)
 
     fake.stub(:class) { 'banana' }
     expect(fake.class).to eq('banana')

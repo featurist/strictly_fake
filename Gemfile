@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in strict_fake.gemspec
+# Specify your gem's dependencies in strictly_fake.gemspec
 gemspec
 
 gem 'awesome_print'

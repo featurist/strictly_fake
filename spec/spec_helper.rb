@@ -10,7 +10,7 @@ if ENV.fetch('COVERAGE', false)
 end
 require 'bundler/setup'
 require 'awesome_print'
-require 'strict_fake'
+require 'strictly_fake'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

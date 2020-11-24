@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative './strict_fake/version'
+require_relative './strictly_fake/version'
 
-# StrictFake - verifying fake
-class StrictFake
+# StrictlyFake - verifying fake
+class StrictlyFake
   class Error < StandardError; end
 
   # Actual fake
