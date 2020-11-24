@@ -37,7 +37,7 @@ payment_processor = VeryFake.new(PaymentProcessor.new)
 # Throws "Can't stub non-existent method PaymentProcessor#bar (VeryFake::Error)"
 payment_processor.stub(:bar)
 
-# Still throws: "Expected PaymentProcessor#pay stub to accept (req, req, opt), but was (req) (VeryFake::Error)"
+# Still throws: "Expected PaymentProcessor#pay stub to accept (req, req, opt=), but was (req) (VeryFake::Error)"
 payment_processor.stub(:pay) { |amount| }
 
 # All good now!
