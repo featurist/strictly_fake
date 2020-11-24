@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['artemave']
   spec.email         = ['artemave@gmail.com']
 
-  spec.summary       = 'Stub that automatically verifies that stubbed methods exist and the signatures match.'
+  spec.summary       = 'Stub that automatically verifies that stubbed methods exist and the signatures match the original.'
   spec.description   = "This is similar to Rspec's Veryfing Double, but standalone. So can be used in Minitest."
   spec.homepage      = 'https://github.com/featurist/veri_fake'
   spec.license       = 'MIT'
