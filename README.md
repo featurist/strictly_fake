@@ -52,6 +52,9 @@ payment_processor.stub(:pay) do |recipient, amount, reference = nil|
   invoked = true
 end
 
+payment_processor.pay('Dave', Money.new(10))
+assert(invoked)
+
 # Stubbing class methods is no different
 time = VeryFake.new(Time)
 
