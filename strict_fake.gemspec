@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/very_fake/version'
+require_relative 'lib/strict_fake/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'very_fake'
-  spec.version       = VeryFake::VERSION
+  spec.name          = 'strict_fake'
+  spec.version       = StrictFake::VERSION
   spec.authors       = ['artemave']
   spec.email         = ['artemave@gmail.com']
 
