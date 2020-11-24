@@ -1,4 +1,4 @@
-# StrictFake
+# StrictFake [![Build Status](https://travis-ci.org/featurist/strict_fake.svg?branch=master)](https://travis-ci.org/featurist/strict_fake)
 
 Sometimes fakes are a good choice. But the price is high. In particular, they make changing code harder. You rename a method, but all tests that stub the previous version _keep_ passing. It would be nice if those started to fail so that when they're green again, you can be certain that everything that had to be updated was updated. Well, now you can.
 
