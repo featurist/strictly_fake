@@ -26,27 +26,31 @@ And then execute:
 ```ruby
 require 'very_fake'
 
-# Create fake instance of `Time`
-now = VeryFake.new(Time.now)
-
-# Throws "Can't stub non-existent method Time#bar (VeryFake::Error)"
-now.stub(:bar)
-
-# Still throws: "Expected Time#zone stub to accept (), but was (req) (VeryFake::Error)"
-now.stub(:zone) { |arg| }
-
-# All good now!
-now.stub(:zone) { 'XYZ' }
-now.zone # => 'XYZ'
-
-# Spy on the arguments
-now.stub(:strftime) do |fmt|
-  assert(fmt.is_a?(String))
+# Given we don't want to actually pay in tests
+class PaymentProcessor
+  def pay(recipient, amount, reference = nil); end
 end
 
-# Verify it's been called
-assert_difference('now.__calls.size') { now.strftime('zyx') }
-assert_equal([['xyz']], now.__calls)
+# We can use a fake instead
+payment_processor = VeryFake.new(PaymentProcessor.now)
+
+# Throws "Can't stub non-existent method PaymentProcessor#bar (VeryFake::Error)"
+payment_processor.stub(:bar)
+
+# Still throws: "Expected PaymentProcessor#pay stub to accept (req, req, opt), but was (req) (VeryFake::Error)"
+payment_processor.stub(:pay) { |amount| }
+
+# All good now!
+payment_processor.stub(:pay) { |recipient, amount, reference = nil| 'Success!' }
+payment_processor.pay('Dave', 10) # => 'Success!'
+
+# Makeshift mock
+invoked = false
+payment_processor.stub(:pay) do |recipient, amount, reference = nil|
+  # Further assert arguments
+  assert(amount.is_a?(Money))
+  invoked = true
+end
 
 # Stubbing class methods is no different
 time = VeryFake.new(Time)
