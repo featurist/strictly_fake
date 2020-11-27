@@ -36,7 +36,7 @@ end
 # We can use a fake instead
 payment_gateway = StrictlyFake.new(PaymentGateway.new)
 
-# Let's stub a method that isn't defined in PaymentGateway:
+# Let's stub a method that _isn't_ defined in PaymentGateway:
 payment_gateway.stub(:bar)
 # => throws "Can't stub non-existent method PaymentGateway#bar (StrictlyFake::Error)"
 
@@ -60,6 +60,7 @@ end
 
 payment_gateway.pay('Dave', Money.new(10))
 assert(invoked)
+# => Pass
 
 # Stubbing class methods is no different
 time = StrictlyFake.new(Time)
@@ -70,7 +71,8 @@ time.now
 
 # Combine with Minitest stub to actually stub constant
 Time.stub :now, time.now do
-  # Some code that calls Time.now
+  Time.now
+  # => 'XYZ'
 end
 ```
 
