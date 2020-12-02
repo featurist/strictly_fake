@@ -84,6 +84,7 @@ class StrictlyFake
       "accept (#{format_parametes(expected_parameters)}), but was (#{format_parametes(actual_parameters)})"
   end
 
+  # rubocop:disable Metrics/MethodLength
   def format_parametes(parameters)
     parameters.map do |(type, name)|
       {
@@ -97,6 +98,7 @@ class StrictlyFake
       }.fetch(type)
     end.join(', ')
   end
+  # rubocop:enable Metrics/MethodLength
 
   def method_signatures_match?(expected_parameters, actual_parameters)
     expected_keyword_parameters, expected_positional_parameters = split_parameters_by_type(expected_parameters)
