@@ -41,8 +41,8 @@ class StrictlyFake
   end
 
   # rubocop:disable Lint/MissingSuper
-  def method_missing(meth, *args)
-    @fake.send(meth, *args)
+  def method_missing(meth, *args, &block)
+    @fake.send(meth, *args, &block)
   end
   # rubocop:enable Lint/MissingSuper
 
@@ -92,7 +92,8 @@ class StrictlyFake
         rest: '*rest',
         key: ":#{name}",
         keyreq: ":#{name}",
-        keyrest: '**keyrest'
+        keyrest: '**keyrest',
+        block: '&block'
       }.fetch(type)
     end.join(', ')
   end

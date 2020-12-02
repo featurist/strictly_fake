@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    strict_fake (0.1.0)
+    strictly_fake (0.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -59,7 +59,7 @@ DEPENDENCIES
   rspec
   rubocop
   simplecov
-  strict_fake!
+  strictly_fake!
 
 BUNDLED WITH
    2.1.4

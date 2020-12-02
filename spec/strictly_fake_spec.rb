@@ -61,9 +61,9 @@ RSpec.describe StrictlyFake do
     fake = StrictlyFake.new(RealThing.new)
     n = 0
 
-    fake.stub(:bar) { n = 1 }
+    fake.stub(:bar) { |&block| block.call }
 
-    fake.bar
+    fake.bar { n = 1 }
     fake.method :bar
 
     expect(n).to eq(1)
