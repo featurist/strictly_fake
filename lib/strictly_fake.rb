@@ -53,7 +53,7 @@ class StrictlyFake
   private
 
   def stub_method(meth, &block)
-    if respond_to?(meth)
+    if Object.respond_to?(meth)
       (class << self; self; end).class_eval do
         undef_method meth
       end

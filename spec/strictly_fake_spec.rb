@@ -104,6 +104,16 @@ RSpec.describe StrictlyFake do
     )
   end
 
+  it 'can stub the same method multiple times' do
+    fake = StrictlyFake.new(RealThing.new)
+
+    fake.stub(:bar) { 1 }
+    expect(fake.bar).to eq(1)
+
+    fake.stub(:bar) { 2 }
+    expect(fake.bar).to eq(2)
+  end
+
   it 'allows to stub Object.methods too' do
     fake = StrictlyFake.new(RealThing.new)
 
