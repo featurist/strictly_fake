@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+Object.const_defined?(:Warning) && Warning.respond_to?(:[]=) && Warning[:deprecated] = true
+
 if ENV.fetch('COVERAGE', false)
   require 'simplecov'
   SimpleCov.start do

@@ -13,6 +13,8 @@ class RealThing
   def bar; end
 
   def stub; end
+
+  def kwarg_method(bbb:); end
 end
 
 # rubocop:disable Metrics/BlockLength
@@ -67,6 +69,9 @@ RSpec.describe StrictlyFake do
     fake.method :bar
 
     expect(n).to eq(1)
+
+    fake.stub(:kwarg_method) { |bbb:| bbb }
+    expect(fake.kwarg_method(bbb: 'bbb')).to eq('bbb')
   end
 
   it 'keyword arguments can be in any order' do

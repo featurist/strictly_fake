@@ -40,13 +40,11 @@ class StrictlyFake
     stub_method(meth, &block)
   end
 
-  # rubocop:disable Lint/MissingSuper
-  def method_missing(meth, *args, &block)
-    @fake.send(meth, *args, &block)
+  def method_missing(meth, *args, **kwargs, &block)
+    @fake.send(meth, *args, **kwargs, &block)
   end
-  # rubocop:enable Lint/MissingSuper
 
-  def respond_to_missing?(meth, *_args)
+  def respond_to_missing?(meth, include_private = false)
     @fake.respond_to?(meth) || super
   end
 
